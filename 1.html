@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SleepWell Spray — Live Well</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Raleway:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --gold: #C8960C;
+    --gold-light: #E8B923;
+    --gold-pale: #F5D67A;
+    --gold-dark: #7A5C00;
+    --black: #000000;
+    --black-soft: #0a0a0a;
+    --black-mid: #111111;
+    --black-card: #151515;
+    --white: #ffffff;
+    --white-dim: rgba(255,255,255,0.07);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* Stars background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(200,150,12,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 40% 10%, rgba(200,150,12,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 25%, rgba(200,150,12,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 80% 55%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 85%, rgba(200,150,12,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 45%, rgba(200,150,12,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 90%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 85% 15%, rgba(200,150,12,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 50%, rgba(255,255,255,0.3) 0%, transparent 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 4rem;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,150,12,0.2);
+  }
+
+  .nav-logo {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: var(--gold);
+    letter-spacing: 0.15em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+    padding: 6rem 2rem 4rem;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 600px; height: 300px;
+    background: radial-gradient(ellipse, rgba(200,150,12,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-moon {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    animation: float 4s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(200,150,12,0.5));
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Cinzel', serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1.2rem;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    background: linear-gradient(135deg, var(--gold-pale) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 0.3rem;
+  }
+
+  .hero-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(1rem, 2vw, 1.5rem);
+    font-weight: 400;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.5em;
+    margin-bottom: 2rem;
+  }
+
+  .hero-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 3rem;
+    max-width: 500px;
+  }
+
+  .gold-line {
+    width: 80px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    margin: 0 auto 2.5rem;
+  }
+
+  .hero-cta {
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-cta::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: translateX(-100%);
+    transition: transform 0.3s;
+    z-index: -1;
+  }
+
+  .hero-cta:hover { color: var(--black); }
+  .hero-cta:hover::before { transform: translateX(0); }
+
+  /* SECTIONS */
+  section { position: relative; z-index: 1; }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 6rem 2rem;
+  }
+
+  .section-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    margin-bottom: 2rem;
+    color: var(--white);
+  }
+
+  .section-title span {
+    background: linear-gradient(135deg, var(--gold-pale), var(--gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* ABOUT */
+  .about { background: var(--black-soft); }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .about-text p {
+    color: rgba(255,255,255,0.6);
+    line-height: 1.9;
+    font-size: 0.95rem;
+    margin-bottom: 1.2rem;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    background: var(--white-dim);
+    border: 1px solid rgba(200,150,12,0.2);
+    padding: 1.8rem 1.5rem;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    color: var(--gold);
+    display: block;
+    line-height: 1;
+    margin-bottom: 0.4rem;
+  }
+
+  .stat-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+  }
+
+  /* BENEFITS */
+  .benefits { background: var(--black); }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: rgba(200,150,12,0.15);
+    border: 1px solid rgba(200,150,12,0.15);
+    margin-top: 3rem;
+  }
+
+  .benefit-card {
+    background: var(--black);
+    padding: 2.5rem 2rem;
+    transition: background 0.3s;
+  }
+
+  .benefit-card:hover { background: rgba(200,150,12,0.05); }
+
+  .benefit-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .benefit-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    margin-bottom: 0.7rem;
+  }
+
+  .benefit-desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+  }
+
+  /* SCENTS */
+  .scents { background: var(--black-soft); }
+
+  .scents-intro {
+    max-width: 550px;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.9;
+    font-size: 0.95rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .scents-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .scent-card {
+    background: var(--black-card);
+    border: 1px solid rgba(200,150,12,0.15);
+    padding: 2rem 1.8rem;
+    transition: all 0.3s;
+    cursor: default;
+  }
+
+  .scent-card:hover {
+    border-color: rgba(200,150,12,0.5);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(200,150,12,0.08);
+  }
+
+  .scent-emoji {
+    font-size: 2.2rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .scent-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .scent-mood {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: rgba(200,150,12,0.6);
+    text-transform: uppercase;
+    margin-bottom: 0.8rem;
+    display: block;
+  }
+
+  .scent-desc {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.7;
+  }
+
+  /* HOW TO USE */
+  .howto { background: var(--black); }
+
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin-top: 3rem;
+    counter-reset: steps;
+  }
+
+  .step {
+    position: relative;
+    padding: 2rem;
+    border-top: 1px solid rgba(200,150,12,0.3);
+  }
+
+  .step-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    color: rgba(200,150,12,0.15);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .step-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 0.6rem;
+  }
+
+  .step-desc {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.7;
+  }
+
+  /* CONTACT */
+  .contact {
+    background: var(--black-soft);
+    text-align: center;
+  }
+
+  .contact .section-inner { padding-bottom: 5rem; }
+
+  .contact-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 3rem;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2rem;
+    border: 1px solid rgba(200,150,12,0.4);
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: all 0.3s;
+  }
+
+  .contact-btn:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--black);
+    border-top: 1px solid rgba(200,150,12,0.15);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.2);
+    letter-spacing: 0.1em;
+  }
+
+  footer span { color: var(--gold); }
+
+  /* DIVIDER */
+  .gold-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, rgba(200,150,12,0.4) 50%, transparent 100%);
+  }
+
+  /* Fade in animation */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero > * {
+    animation: fadeUp 0.8s ease forwards;
+    opacity: 0;
+  }
+
+  .hero-moon { animation-delay: 0.1s; }
+  .hero-eyebrow { animation-delay: 0.2s; }
+  .hero-title { animation-delay: 0.3s; }
+  .hero-subtitle { animation-delay: 0.4s; }
+  .hero-tagline { animation-delay: 0.5s; }
+  .gold-line { animation-delay: 0.55s; }
+  .hero-cta { animation-delay: 0.6s; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .benefits-grid { grid-template-columns: 1fr; }
+    .scents-grid { grid-template-columns: 1fr 1fr; }
+    .steps { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">SleepWell Spray</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#scents">Scents</a></li>
+    <li><a href="#benefits">Benefits</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="hero-moon">🌙</div>
+  <p class="hero-eyebrow">Aromatherapy · Wellness · Sleep</p>
+  <h1 class="hero-title">SleepWell Spray</h1>
+  <p class="hero-subtitle">Live Well</p>
+  <p class="hero-tagline">A pocket-sized escape into calm — crafted for students who deserve better sleep.</p>
+  <div class="gold-line"></div>
+  <a href="#scents" class="hero-cta">Discover Our Scents</a>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- ABOUT -->
+<section id="about" class="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-text">
+        <span class="section-label">Our Story</span>
+        <h2 class="section-title">What is <span>SleepWell Spray?</span></h2>
+        <p>SleepWell Spray is a pocket-sized aromatherapy spray designed to help you relax, unwind, and improve your sleep quality naturally.</p>
+        <p>Born from the everyday struggles of students facing stress, anxiety, and sleepless nights — our spray brings the calming power of essential oils directly to your pillow, bed, or surrounding space.</p>
+        <p>Easy to use, affordable, and sustainable with our refill option. Because everyone deserves a good night's sleep.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <span class="stat-number">6</span>
+          <span class="stat-label">Unique Scents</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Natural Ingredients</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">♻</span>
+          <span class="stat-label">Refill Option</span>
+        </div>
+        <div class="stat-card">
+          <span class="stat-number">✦</span>
+          <span class="stat-label">Student Friendly</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- BENEFITS -->
+<section id="benefits" class="benefits">
+  <div class="section-inner">
+    <span class="section-label">Why SleepWell</span>
+    <h2 class="section-title">Feel the <span>Difference</span></h2>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <span class="benefit-icon">😌</span>
+        <h3 class="benefit-title">Reduce Stress & Anxiety</h3>
+        <p class="benefit-desc">Our carefully selected essential oils work to calm your nervous system and melt away the tension of a long day.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-icon">💤</span>
+        <h3 class="benefit-title">Improve Sleep Quality</h3>
+        <p class="benefit-desc">Fall asleep faster and wake up feeling refreshed. Aromatherapy has been shown to naturally support better, deeper sleep.</p>
+      </div>
+      <div class="benefit-card">
+        <span class="benefit-icon">🌿</span>
+        <h3 class="benefit-title">Relax Body & Mind</h3>
+        <p class="benefit-desc">A few sprays create an instant atmosphere of calm — transforming any space into your personal sanctuary.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- SCENTS -->
+<section id="scents" class="scents">
+  <div class="section-inner">
+    <span class="section-label">Collection</span>
+    <h2 class="section-title">Our <span>Six Scents</span></h2>
+    <p class="scents-intro">Each scent is crafted to target a specific mood and sleep need. Find your perfect match.</p>
+    <div class="scents-grid">
+      <div class="scent-card">
+        <span class="scent-emoji">🌼</span>
+        <h3 class="scent-name">Chamomile</h3>
+        <span class="scent-mood">Soft & Comforting</span>
+        <p class="scent-desc">Helps reduce stress and relax the body. Feels like a warm and calming sensation.</p>
+      </div>
+      <div class="scent-card">
+        <span class="scent-emoji">🌲</span>
+        <h3 class="scent-name">Cedarwood</h3>
+        <span class="scent-mood">Grounding & Deep Sleep</span>
+        <p class="scent-desc">A warm, woody scent that helps slow down heart rate and promotes deep relaxation.</p>
+      </div>
+      <div class="scent-card">
+        <span class="scent-emoji">🍋</span>
+        <h3 class="scent-name">Bergamot</h3>
+        <span class="scent-mood">Calm but Light</span>
+        <p class="scent-desc">Reduces stress and overthinking with a fresh citrus scent. Perfect for lighter preferences.</p>
+      </div>
+      <div class="scent-card">
+        <span class="scent-emoji">🌸</span>
+        <h3 class="scent-name">Ylang-Ylang</h3>
+        <span class="scent-mood">Emotional Relaxation</span>
+        <p class="scent-desc">Helps reduce emotional stress and tension while improving your overall mood.</p>
+      </div>
+      <div class="scent-card">
+        <span class="scent-emoji">🍊</span>
+        <h3 class="scent-name">Sweet Orange</h3>
+        <span class="scent-mood">Gentle & Comforting</span>
+        <p class="scent-desc">Uplifts mood and provides a cozy, calming feeling perfect for winding down.</p>
+      </div>
+      <div class="scent-card">
+        <span class="scent-emoji">💜</span>
+        <h3 class="scent-name">Lavender</h3>
+        <span class="scent-mood">Classic Calming</span>
+        <p class="scent-desc">The classic sleep companion. Reduces anxiety, improves sleep quality and promotes overall relaxation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- HOW TO USE -->
+<section class="howto">
+  <div class="section-inner">
+    <span class="section-label">Usage</span>
+    <h2 class="section-title">How to <span>Use It</span></h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-number">01</div>
+        <h3 class="step-title">Choose Your Scent</h3>
+        <p class="step-desc">Select the scent that matches your mood and sleep need for the night.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <h3 class="step-title">Spray & Breathe</h3>
+        <p class="step-desc">Spritz 2–3 times onto your pillow, bed linen, or into the air around you.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <h3 class="step-title">Sleep Well</h3>
+        <p class="step-desc">Breathe deeply, relax, and let the natural aromatherapy do its work. Sweet dreams. 🌙</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+  <div class="section-inner">
+    <span class="section-label">Get In Touch</span>
+    <h2 class="section-title">Find Us <span>Online</span></h2>
+    <p class="contact-tagline">Follow our journey and order your SleepWell Spray today</p>
+    <div class="contact-links">
+      <a href="#" class="contact-btn">📸 Instagram</a>
+      <a href="#" class="contact-btn">🎵 TikTok</a>
+      <a href="#" class="contact-btn">💬 WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 <span>SleepWell Spray</span> · Live Well · All rights reserved</p>
+</footer>
+
+</body>
+</html>
